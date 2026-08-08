@@ -84,8 +84,9 @@ const initOpeningStory = (hero) => {
   const introLen = () => window.innerHeight * 1.35;
   const hold = () => Math.max(320, horizontal.clientWidth * 0.4);
   const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
-  // Mobile: stretch the pinned distance so each card needs more scrolling
-  const scrollFactor = () => (isMobile() ? 1.7 : 1);
+  // Snapping now keeps cards from resting halfway, so the pinned distance no
+  // longer needs to be stretched much to keep them readable.
+  const scrollFactor = () => (isMobile() ? 1.15 : 1);
 
   // Fixed timeline split — light opening → horizontal card travel → hold.
   // Kept as constants (not derived from build-time pixel measurements) so the
@@ -101,7 +102,10 @@ const initOpeningStory = (hero) => {
       start: "top top",
       end: () => `+=${(introLen() + travel() + hold()) * scrollFactor()}`,
       pin: true,
-      scrub: 0.75,
+      // Snap already settles the cards, so on mobile the track can track the
+      // finger closely instead of easing in for another three-quarters of a
+      // second after each snap.
+      scrub: isMobile() ? 0.3 : 0.75,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       // Mobile: settle on whole cards so the track never rests halfway between
@@ -116,8 +120,8 @@ const initOpeningStory = (hero) => {
           const steps = panels.length - 1;
           return introShare + (Math.round(moveProgress * steps) / steps) * moveShare;
         },
-        duration: { min: 0.15, max: 0.45 },
-        delay: 0.05,
+        duration: { min: 0.1, max: 0.25 },
+        delay: 0.02,
         ease: "power2.out",
       },
       onUpdate: ({ progress }) => {
