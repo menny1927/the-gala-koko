@@ -57,7 +57,7 @@ export function initExperience() {
       end: () => `+=${window.innerHeight * 3.6}`,
       pin: true,
       pinSpacing: true,
-      scrub: 0.3,
+      scrub: 0.6,
       invalidateOnRefresh: true
     }
   });

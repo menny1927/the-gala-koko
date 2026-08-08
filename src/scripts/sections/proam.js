@@ -132,8 +132,33 @@ export function initProam() {
   viewport?.addEventListener('pointerleave', hideCursor);
   window.addEventListener('scroll', hideCursor, { passive: true });
 
+  // A swipe finishes with a click on whichever card sits under the finger, so
+  // only treat it as a tap when neither the pointer nor the carousel moved.
+  const DRAG_TOLERANCE = 10;
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+  let scrollStart = 0;
+
+  scroller?.addEventListener(
+    'pointerdown',
+    (event) => {
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      scrollStart = scroller.scrollLeft;
+    },
+    { passive: true }
+  );
+
+  const wasDragged = (event) =>
+    Math.abs(event.clientX - pointerStartX) > DRAG_TOLERANCE ||
+    Math.abs(event.clientY - pointerStartY) > DRAG_TOLERANCE ||
+    Math.abs((scroller?.scrollLeft ?? 0) - scrollStart) > 2;
+
   cards.forEach((card) => {
-    card.addEventListener('click', () => openLightbox(card));
+    card.addEventListener('click', (event) => {
+      if (wasDragged(event)) return;
+      openLightbox(card);
+    });
   });
 
   prevBtn.addEventListener('click', goPrev);
