@@ -19,8 +19,11 @@ export function initPastEventsScatter() {
 
   const CONFIG = {
     cardCount: isMobile ? 5 : 10,
-    cardWidth: 250,
-    cardHeight: 300,
+    cardWidth: isMobile ? 130 : 190,
+    cardHeight: isMobile ? 160 : 230,
+    // Half-extent of a clear pocket at the centre (a 50x50 box) that no card
+    // may overlap, so they frame the heading instead of piling on it.
+    centerKeepOut: 25,
     animationDuration: 0.75,
     animationOverlap: 0.5,
     headingFadeDuration: 0.5,
@@ -32,6 +35,9 @@ export function initPastEventsScatter() {
     ],
     setsBasePath: "past-events"
   };
+
+  gallery.style.setProperty("--pe-card-w", `${CONFIG.cardWidth}px`);
+  gallery.style.setProperty("--pe-card-h", `${CONFIG.cardHeight}px`);
 
   const state = {
     activeCards: [],
@@ -195,6 +201,26 @@ export function initPastEventsScatter() {
 
       centerX = Math.min(maxX, Math.max(minX, centerX));
       centerY = Math.min(maxY, Math.max(minY, centerY));
+
+      // Push the card clear of the centre pocket, along whichever axis needs
+      // the least movement.
+      const focalX = W / 2;
+      const focalY = H / 2;
+      const clearX = CONFIG.cardWidth / 2 + CONFIG.centerKeepOut;
+      const clearY = CONFIG.cardHeight / 2 + CONFIG.centerKeepOut;
+      const dx = centerX - focalX;
+      const dy = centerY - focalY;
+
+      if (Math.abs(dx) < clearX && Math.abs(dy) < clearY) {
+        if (clearX - Math.abs(dx) < clearY - Math.abs(dy)) {
+          centerX = focalX + (dx < 0 ? -clearX : clearX);
+        } else {
+          centerY = focalY + (dy < 0 ? -clearY : clearY);
+        }
+
+        centerX = Math.min(maxX, Math.max(minX, centerX));
+        centerY = Math.min(maxY, Math.max(minY, centerY));
+      }
 
       gsap.set(card, {
         left: centerX - CONFIG.cardWidth / 2,

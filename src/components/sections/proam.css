@@ -19,17 +19,27 @@
   max-width: 56ch;
 }
 
+/* Native horizontal scrolling: gives real swipe + momentum on touch, and the
+   arrow buttons drive the same scroll position. */
 .proam__viewport {
   position: relative;
-  overflow: hidden;
   width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.proam__viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .proam__track {
   display: flex;
   gap: 28px;
   width: max-content;
-  will-change: transform;
 }
 
 .proam__card {
@@ -39,6 +49,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  scroll-snap-align: start;
 }
 
 .proam__media {

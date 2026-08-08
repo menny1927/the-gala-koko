@@ -17,63 +17,32 @@ export function initProam() {
 
   if (!track || !cards.length || !prevBtn || !nextBtn) return;
 
-  let currentIndex = 0;
-  let step = 0;
-  let maxIndex = 0;
   let previousFocus = null;
   let previousOverflow = '';
   let cursorVisible = false;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const scroller = section.querySelector('[data-proam-track-wrap]');
 
+  // Distance between two card origins, so a click advances exactly one card.
   const getStep = () => {
-    if (cards.length < 2) {
-      const cardRect = cards[0]?.getBoundingClientRect();
-      return cardRect ? cardRect.width : 0;
-    }
-
-    const firstRect = cards[0].getBoundingClientRect();
-    const secondRect = cards[1].getBoundingClientRect();
-    return secondRect.left - firstRect.left;
+    if (cards.length < 2) return cards[0]?.getBoundingClientRect().width ?? 0;
+    return cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
   };
 
-  const getVisibleCards = () => {
-    const viewport = section.querySelector('[data-proam-track-wrap]');
-    if (!viewport || !step) return 1;
-
-    return Math.max(1, Math.floor(viewport.clientWidth / step));
+  const scrollByStep = (direction) => {
+    if (!scroller) return;
+    const max = scroller.scrollWidth - scroller.clientWidth;
+    const target = gsap.utils.clamp(0, max, scroller.scrollLeft + direction * getStep());
+    gsap.to(scroller, {
+      scrollLeft: target,
+      duration: 0.5,
+      ease: 'power2.out',
+      overwrite: true
+    });
   };
 
-  const updateBounds = () => {
-    step = getStep();
-    const visibleCards = getVisibleCards();
-    maxIndex = Math.max(0, cards.length - visibleCards);
-    currentIndex = Math.min(currentIndex, maxIndex);
-    moveTrack(false);
-  };
-
-  const moveTrack = (animate = true) => {
-    const x = -(currentIndex * step);
-
-    if (animate) {
-      gsap.to(track, {
-        x,
-        duration: 0.65,
-        ease: 'power3.out'
-      });
-    } else {
-      gsap.set(track, { x });
-    }
-  };
-
-  const goNext = () => {
-    currentIndex = Math.min(currentIndex + 1, maxIndex);
-    moveTrack(true);
-  };
-
-  const goPrev = () => {
-    currentIndex = Math.max(currentIndex - 1, 0);
-    moveTrack(true);
-  };
+  const goNext = () => scrollByStep(1);
+  const goPrev = () => scrollByStep(-1);
 
   const canShowCursor = () =>
     Boolean(cursor && window.innerWidth > 980 && finePointer.matches);
@@ -148,7 +117,7 @@ export function initProam() {
     previousFocus?.focus?.();
   };
 
-  const viewport = section.querySelector('[data-proam-track-wrap]');
+  const viewport = scroller;
   if (cursor) {
     gsap.set(cursor, {
       xPercent: -50,
@@ -184,7 +153,4 @@ export function initProam() {
     if (lightboxOpen) trapDialogFocus(lightbox, e);
   });
 
-  window.addEventListener('resize', updateBounds);
-
-  updateBounds();
 }

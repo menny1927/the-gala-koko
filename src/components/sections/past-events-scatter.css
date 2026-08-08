@@ -64,8 +64,8 @@
   appearance: none;
   -webkit-appearance: none;
   position: absolute;
-  width: 250px;
-  height: 300px;
+  width: var(--pe-card-w, 250px);
+  height: var(--pe-card-h, 300px);
   padding: 0;
   margin: 0;
   background: transparent;

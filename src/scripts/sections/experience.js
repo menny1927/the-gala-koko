@@ -29,140 +29,85 @@ export function initExperience() {
   const cardYOffset = 5;
   const cardScaleStep = 0.075;
   const cardExitY = -215;
+  const cardExitRotation = 28;
 
-  const setInitialStack = () => {
-    cards.forEach((card, index) => {
-      gsap.set(card, {
-        xPercent: -50,
-        yPercent: -50 + index * cardYOffset,
-        scale: 1 - index * cardScaleStep,
-        rotationX: 0,
-        autoAlpha: 1
-      });
-    });
-  };
+  // Resting position of a card sitting `depth` places back in the stack.
+  const depthY = (depth) => -50 + depth * cardYOffset;
+  const depthScale = (depth) => 1 - depth * cardScaleStep;
 
-  const setExited = (card) => {
+  cards.forEach((card, index) => {
     gsap.set(card, {
-      yPercent: cardExitY,
-      rotationX: 28,
-      scale: 1,
-      autoAlpha: 1
-    });
-  };
-
-  const setLastCardAtRest = () => {
-    cards.slice(0, -1).forEach(setExited);
-    gsap.set(cards[totalCards - 1], {
-      yPercent: -50,
+      xPercent: -50,
+      yPercent: depthY(index),
+      scale: depthScale(index),
       rotationX: 0,
-      scale: 1,
-      autoAlpha: 1
+      autoAlpha: 0
     });
-  };
+  });
 
-  setInitialStack();
-  gsap.set(cards, { autoAlpha: 0 });
   if (intro) gsap.set(intro, { autoAlpha: 1 });
   if (reveal) gsap.set(reveal, { autoAlpha: 0 });
 
-  const trigger = ScrollTrigger.create({
-    trigger: section,
-    start: "top top",
-    end: () => `+=${window.innerHeight * 3.6}`,
-    pin: true,
-    pinSpacing: true,
-    scrub: 0.8,
-    invalidateOnRefresh: true,
-    onUpdate: ({ progress }) => {
-      if (progress < transitionStart) {
-        setInitialStack();
-        const cardRevealProgress = gsap.utils.clamp(
-          0,
-          1,
-          (progress - 0.04) / 0.05
-        );
-        gsap.set(cards, { autoAlpha: cardRevealProgress });
-      } else if (progress <= transitionEnd) {
-        const transitionProgress = progress - transitionStart;
-        const activeIndex = Math.min(
-          Math.floor(transitionProgress / segmentSize),
-          transitionCount - 1
-        );
-        const segmentProgress = gsap.utils.clamp(
-          0,
-          1,
-          (transitionProgress - activeIndex * segmentSize) / segmentSize
-        );
-
-        cards.forEach((card, index) => {
-          if (index < activeIndex) {
-            setExited(card);
-            return;
-          }
-
-          if (index === activeIndex) {
-            gsap.set(card, {
-              yPercent: gsap.utils.interpolate(-50, cardExitY, segmentProgress),
-              rotationX: gsap.utils.interpolate(0, 28, segmentProgress),
-              scale: 1,
-              autoAlpha: 1
-            });
-            return;
-          }
-
-          const depth = index - activeIndex - segmentProgress;
-          gsap.set(card, {
-            yPercent: -50 + depth * cardYOffset,
-            rotationX: 0,
-            scale: 1 - depth * cardScaleStep,
-            autoAlpha: 1
-          });
-        });
-      } else if (progress <= lastCardHoldEnd) {
-        setLastCardAtRest();
-      } else if (progress <= lastCardExitEnd) {
-        const exitProgress = gsap.utils.clamp(
-          0,
-          1,
-          (progress - lastCardHoldEnd) / (lastCardExitEnd - lastCardHoldEnd)
-        );
-
-        cards.slice(0, -1).forEach(setExited);
-        gsap.set(cards[totalCards - 1], {
-          yPercent: gsap.utils.interpolate(-50, cardExitY, exitProgress),
-          rotationX: gsap.utils.interpolate(0, 28, exitProgress),
-          scale: 1,
-          autoAlpha: 1
-        });
-      } else {
-        cards.forEach(setExited);
-      }
-
-      if (intro) {
-        const introProgress = gsap.utils.clamp(0, 1, progress / 0.08);
-        gsap.set(intro, { autoAlpha: 1 - introProgress });
-      }
-
-      if (reveal) {
-        const revealProgress = gsap.utils.clamp(
-          0,
-          1,
-          (progress - revealStart) / (1 - revealStart)
-        );
-        gsap.set(reveal, { autoAlpha: revealProgress });
-      }
+  // A single scrubbed timeline whose duration maps 1:1 onto scroll progress.
+  const timeline = gsap.timeline({
+    defaults: { ease: "none" },
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: () => `+=${window.innerHeight * 3.6}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      invalidateOnRefresh: true
     }
   });
 
-  const onResize = () => ScrollTrigger.refresh();
+  if (intro) timeline.to(intro, { autoAlpha: 0, duration: 0.08 }, 0);
+  timeline.to(cards, { autoAlpha: 1, duration: 0.05 }, 0.04);
+
+  // Each step lifts the front card away and pulls the rest one place forward.
+  for (let i = 0; i < transitionCount; i += 1) {
+    const at = transitionStart + i * segmentSize;
+
+    timeline.to(
+      cards[i],
+      { yPercent: cardExitY, rotationX: cardExitRotation, scale: 1, duration: segmentSize },
+      at
+    );
+
+    for (let j = i + 1; j < totalCards; j += 1) {
+      const depth = j - i - 1;
+      timeline.to(
+        cards[j],
+        { yPercent: depthY(depth), scale: depthScale(depth), duration: segmentSize },
+        at
+      );
+    }
+  }
+
+  timeline.to(
+    cards[totalCards - 1],
+    {
+      yPercent: cardExitY,
+      rotationX: cardExitRotation,
+      duration: lastCardExitEnd - lastCardHoldEnd
+    },
+    lastCardHoldEnd
+  );
+
+  if (reveal) {
+    timeline.to(reveal, { autoAlpha: 1, duration: 1 - revealStart }, revealStart);
+  }
+
+  // Pad the timeline so its duration is exactly 1 and matches scroll progress.
+  timeline.to({}, { duration: 0 }, 1);
+
   const onAnimationsReady = () => ScrollTrigger.refresh();
-  window.addEventListener("resize", onResize);
   window.addEventListener("site:animations-ready", onAnimationsReady, { once: true });
 
   return () => {
-    trigger.kill();
-    window.removeEventListener("resize", onResize);
+    timeline.scrollTrigger?.kill();
+    timeline.kill();
     window.removeEventListener("site:animations-ready", onAnimationsReady);
   };
 }

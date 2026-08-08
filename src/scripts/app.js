@@ -1,4 +1,5 @@
 import { safeInit } from "./lib/safeInit.js";
+import { configureScrollSmoothing } from "./lib/scrollSmoothing.js";
 
 const features = [
   {
@@ -82,6 +83,9 @@ const features = [
 ];
 
 async function initApp() {
+  // Must run before any section creates a ScrollTrigger.
+  configureScrollSmoothing();
+
   const activeFeatures = features.filter(({ selector }) =>
     document.querySelector(selector)
   );
