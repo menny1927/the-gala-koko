@@ -83,8 +83,9 @@ const initOpeningStory = (hero) => {
   const travel = () => Math.max(0, track.scrollWidth - horizontal.clientWidth);
   const introLen = () => window.innerHeight * 1.35;
   const hold = () => Math.max(320, horizontal.clientWidth * 0.4);
+  const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
   // Mobile: stretch the pinned distance so each card needs more scrolling
-  const scrollFactor = () => (window.matchMedia("(max-width: 760px)").matches ? 1.7 : 1);
+  const scrollFactor = () => (isMobile() ? 1.7 : 1);
 
   // Fixed timeline split — light opening → horizontal card travel → hold.
   // Kept as constants (not derived from build-time pixel measurements) so the
@@ -100,9 +101,25 @@ const initOpeningStory = (hero) => {
       start: "top top",
       end: () => `+=${(introLen() + travel() + hold()) * scrollFactor()}`,
       pin: true,
-      scrub: 0.6,
+      scrub: 0.75,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      // Mobile: settle on whole cards so the track never rests halfway between
+      // two of them. The light intro and the trailing hold stay free-scrolling.
+      snap: {
+        snapTo: (value) => {
+          if (!isMobile()) return value;
+
+          const moveProgress = (value - introShare) / moveShare;
+          if (moveProgress <= 0 || moveProgress >= 1) return value;
+
+          const steps = panels.length - 1;
+          return introShare + (Math.round(moveProgress * steps) / steps) * moveShare;
+        },
+        duration: { min: 0.15, max: 0.45 },
+        delay: 0.05,
+        ease: "power2.out",
+      },
       onUpdate: ({ progress }) => {
         updateProgress(moveShare ? (progress - introShare) / moveShare : 0);
       },
@@ -238,7 +255,7 @@ const initOpeningStory = (hero) => {
           containerAnimation: tl,
           start: "left right",
           end: "right left",
-          scrub: 0.6,
+          scrub: 0.75,
         },
       });
     }
@@ -261,7 +278,7 @@ const initOpeningStory = (hero) => {
             containerAnimation: tl,
             start: "left right",
             end: "right left",
-            scrub: 0.6,
+            scrub: 0.75,
           },
         }
       );

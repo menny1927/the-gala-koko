@@ -33,7 +33,7 @@ export function initOrganizers() {
     end: `+=${window.innerHeight * 6}px`,
     pin: true,
     pinSpacing: true,
-    scrub: 0.6,
+    scrub: 0.75,
     onUpdate: (self) => {
       const progress = self.progress;
 
