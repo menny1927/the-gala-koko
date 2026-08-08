@@ -8,7 +8,11 @@ export  function initTesto() {
   const textNodes = Array.from(section.querySelectorAll("[data-text]"));
 
   if (!inner || !cursor || !lines.length || !textNodes.length) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const noCursor =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (noCursor) {
+    // Touch devices have no cursor to chase — show the quote fully lit.
     section.classList.add("is-reduced");
     lines.forEach((line) => line.classList.add("is-on"));
     return;

@@ -237,6 +237,16 @@
     margin: 22px auto 40px;
   }
 
+  /* keep the three lines centred and fully on-screen */
+  .prova-line--top,
+  .prova-line--bot {
+    font-size: clamp(28px, 9.5vw, 44px);
+  }
+
+  .prova-line--mid {
+    font-size: clamp(40px, 14vw, 62px);
+  }
+
   .prova-dot {
     display: none;
   }
@@ -289,7 +299,8 @@
     position: relative;
     left: auto;
     bottom: auto;
-    margin: 22px auto 60px;
+    /* breathe after the image above, sit close to the carousel below */
+    margin: 64px auto 8px;
     width: min(92vw, 900px);
   }
 }

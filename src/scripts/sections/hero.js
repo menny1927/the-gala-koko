@@ -83,6 +83,8 @@ const initOpeningStory = (hero) => {
   const travel = () => Math.max(0, track.scrollWidth - horizontal.clientWidth);
   const introLen = () => window.innerHeight * 1.35;
   const hold = () => Math.max(320, horizontal.clientWidth * 0.4);
+  // Mobile: stretch the pinned distance so each card needs more scrolling
+  const scrollFactor = () => (window.matchMedia("(max-width: 760px)").matches ? 1.7 : 1);
 
   // Fixed timeline split — light opening → horizontal card travel → hold.
   // Kept as constants (not derived from build-time pixel measurements) so the
@@ -96,7 +98,7 @@ const initOpeningStory = (hero) => {
     scrollTrigger: {
       trigger: horizontal,
       start: "top top",
-      end: () => `+=${introLen() + travel() + hold()}`,
+      end: () => `+=${(introLen() + travel() + hold()) * scrollFactor()}`,
       pin: true,
       scrub: 0.85,
       anticipatePin: 1,

@@ -111,20 +111,19 @@
   cursor: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .testo.is-reduced {
-    min-height: 100svh;
-  }
+/* Static fallback — applied by JS on touch devices and reduced motion */
+.testo.is-reduced {
+  min-height: 100svh;
+}
 
-  .testo.is-reduced .testo-inner {
-    position: relative;
-  }
+.testo.is-reduced .testo-inner {
+  position: relative;
+}
 
-  .testo.is-reduced .testo-line {
-    color: rgba(255, 255, 255, 0.96);
-  }
+.testo.is-reduced .testo-line {
+  color: rgba(255, 255, 255, 0.96);
+}
 
-  .testo.is-reduced .testo-cursor {
-    display: none;
-  }
+.testo.is-reduced .testo-cursor {
+  display: none;
 }

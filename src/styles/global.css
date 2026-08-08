@@ -167,6 +167,12 @@ body {
 @media (max-width: 760px), (pointer: coarse) {
   .knockGate {
     cursor: auto;
+    background: #000;
+  }
+
+  /* the radial glows read as a "different black" behind the logo video */
+  .knockGate__bg {
+    display: none;
   }
 
   .knockGate__video {
@@ -177,10 +183,11 @@ body {
     display: none;
   }
 
+  /* knock counter sits ABOVE the logo */
   .knockGate__cursorText {
     position: absolute;
     left: 50%;
-    top: calc(50% + min(36vw, 190px));
+    top: calc(50% - min(52vw, 230px));
     width: max-content;
     max-width: calc(100% - 32px);
     white-space: normal;
@@ -188,9 +195,11 @@ body {
     transform: translate(-50%, -50%) !important;
   }
 
+  /* "goes KOKO" hugs the bottom edge of the logo, like desktop */
   .knockGate__words {
     right: 20px;
-    bottom: 38px;
+    bottom: auto;
+    top: calc(50% + min(30vw, 140px));
   }
 
   .knockGate__word--goes { font-size: clamp(34px, 12vw, 52px); }

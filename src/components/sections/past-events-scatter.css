@@ -174,9 +174,8 @@
 
 @media (max-width: 980px) {
   .peLightbox__panel {
-    align-items: flex-start;
+    align-items: center; /* image centred, not pinned to the top */
     overflow-y: auto;
-    padding-top: 72px;
   }
 
   .peLightbox__grid {

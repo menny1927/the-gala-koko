@@ -79,4 +79,11 @@ const socialImage = configuredSiteUrl
 	.skip-link:focus {
 		transform: translateY(0);
 	}
+
+	/* keyboard-only affordance — hide on touch devices where it pops up after the gate */
+	@media (max-width: 760px), (pointer: coarse) {
+		.skip-link {
+			display: none;
+		}
+	}
 </style>
