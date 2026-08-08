@@ -62,7 +62,7 @@ export function initSpotlight() {
     end: `+=${window.innerHeight * 5}px`,
     pin: true,
     pinSpacing: true,
-    scrub: 1,
+    scrub: 0.3,
     onUpdate: (self) => {
       const progress = self.progress;
 

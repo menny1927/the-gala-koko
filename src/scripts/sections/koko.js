@@ -56,7 +56,7 @@ export function initKoko() {
     end: () => `+=${window.innerHeight * 4}px`,
     pin: true,
     pinSpacing: true,
-    scrub: 1,
+    scrub: 0.3,
     onUpdate: (self) => {
       gsap.set(progressBar, { "--progress": self.progress });
 

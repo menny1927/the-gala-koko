@@ -21,7 +21,9 @@ export function configureScrollSmoothing() {
 
   // Let ScrollTrigger drive touch scrolling from its own ticker rather than
   // reacting to raw touch events — this is what removes the bumpiness.
+  // `momentum` is kept low so the page settles as soon as the finger lifts
+  // instead of gliding on for another chunk of scroll.
   if (ScrollTrigger.isTouch === 1) {
-    ScrollTrigger.normalizeScroll({ allowNestedScroll: true });
+    ScrollTrigger.normalizeScroll({ allowNestedScroll: true, momentum: 0.4 });
   }
 }

@@ -100,7 +100,7 @@ const initOpeningStory = (hero) => {
       start: "top top",
       end: () => `+=${(introLen() + travel() + hold()) * scrollFactor()}`,
       pin: true,
-      scrub: 0.85,
+      scrub: 0.3,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate: ({ progress }) => {
@@ -238,7 +238,7 @@ const initOpeningStory = (hero) => {
           containerAnimation: tl,
           start: "left right",
           end: "right left",
-          scrub: 1,
+          scrub: 0.3,
         },
       });
     }
@@ -261,7 +261,7 @@ const initOpeningStory = (hero) => {
             containerAnimation: tl,
             start: "left right",
             end: "right left",
-            scrub: 1,
+            scrub: 0.3,
           },
         }
       );
