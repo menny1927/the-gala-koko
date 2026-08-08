@@ -1,0 +1,123 @@
+:root {
+  --card-1-stroke: #e67339;
+  --card-2-stroke: #a66363;
+  --card-3-stroke: #eb3828;
+  --card-4-stroke: #a6a09d;
+  --card-5-stroke: #99938a;
+  --card-6-stroke: #5f7c98;
+  --card-base-stroke: #e0e0e0;
+  --card-copy: #000;
+}
+
+/* Scope everything to the page wrapper so it doesn't affect your global site */
+.alessio-page,
+.alessio-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.alessio-page {
+  font-family: "Google Sans", sans-serif;
+}
+
+.alessio-page h1 {
+  font-size: clamp(3rem, 5vw, 7rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.05rem;
+}
+
+.alessio-page h3 {
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.025rem;
+}
+
+.alessio-page img,
+.alessio-page svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#alessio-header,
+#alessio-footer {
+  width: 100%;
+  padding: 15rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.alessio-row {
+  width: 100%;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.alessio-card-container {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.alessio-card-container .alessio-svg-stroke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  width: 100%;
+  height: 100%;
+}
+
+#alessio-card-1 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-1-stroke);
+}
+
+#alessio-card-2 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-2-stroke);
+}
+
+#alessio-card-3 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-3-stroke);
+}
+
+#alessio-card-4 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-4-stroke);
+}
+
+#alessio-card-5 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-5-stroke);
+}
+
+#alessio-card-6 .alessio-svg-stroke-1 svg path {
+  stroke: var(--card-6-stroke);
+}
+
+.alessio-card-container .alessio-svg-stroke-2 svg path {
+  stroke: var(--card-base-stroke);
+}
+
+.alessio-card-title {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  color: var(--card-copy);
+}
+
+.alessio-card-title .word {
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  .alessio-row {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+.radial-page {
+  width: 100%;
+  min-height: 900vh;
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.rg {
+  position: relative;
+  min-height: inherit;
+}
+
+.rg__heading {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  z-index: 3;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rg__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 400px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.rg__cursor img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rg__gallery {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.rg__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(700px, 58vw);
+  min-height: 62px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transform-origin: left center;
+}
+
+.rg__label {
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.rg__count {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.rg__thumb {
+  display: none;
+}
+
+.rg__item:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 5px;
+}
+
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  .radial-page {
+    min-height: auto;
+  }
+
+  .rg {
+    min-height: 100svh;
+    padding: 96px 18px 48px;
+  }
+
+  .rg__heading {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0 0 28px;
+    transform: none;
+    font-size: 12px;
+  }
+
+  .rg__cursor {
+    display: none;
+  }
+
+  .rg__gallery,
+  .rg__gallery.is-static {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+    overflow: visible;
+  }
+
+  .rg__item {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    min-height: 44px;
+    transform: none !important;
+  }
+
+  .rg__thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .rg__label {
+    display: block;
+    font-size: 15px;
+    line-height: 1.15;
+  }
+
+  .rg__count {
+    display: block;
+    padding: 5px 0 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 11px;
+  }
+}

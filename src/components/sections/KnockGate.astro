@@ -1,0 +1,36 @@
+<section
+  class="knockGate"
+  id="knockGate"
+  aria-label="Entrance gate"
+  aria-describedby="knockCursorText"
+  role="dialog"
+  aria-modal="true"
+  tabindex="-1"
+>
+  <div class="knockGate__bg" aria-hidden="true"></div>
+
+  <div class="knockGate__content" aria-hidden="true">
+    <video
+      class="knockGate__video"
+      id="knockGlove"
+      src="/videos/gala-intro.mp4"
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+    ></video>
+  </div>
+
+  <div class="knockGate__words" aria-hidden="true">
+    <span class="knockGate__word knockGate__word--goes" data-knock-word="goes">goes</span>
+    <span class="knockGate__word knockGate__word--koko" data-knock-word="koko">KOKO</span>
+  </div>
+
+  <div class="knockGate__cursor" id="knockCursor" aria-hidden="true">
+    <img class="knockGate__cursorImg" src="/images/glove-cursor.png" alt="" draggable="false" />
+  </div>
+
+  <div class="knockGate__cursorText ui" id="knockCursorText" aria-live="polite">
+    Knock 3 times to enter
+  </div>
+</section>

@@ -1,0 +1,262 @@
+.proam {
+  position: relative;
+  padding: 120px 0;
+  background: #050505;
+  color: var(--fg);
+  overflow: hidden;
+}
+
+.proam__intro {
+  margin-bottom: 34px;
+}
+
+.proam__title {
+  margin-top: 14px;
+}
+
+.proam__lead {
+  margin-top: 14px;
+  max-width: 56ch;
+}
+
+.proam__viewport {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.proam__track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  will-change: transform;
+}
+
+.proam__card {
+  flex: 0 0 auto;
+  width: clamp(240px, 22vw, 320px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.proam__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #111;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.proam__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease, opacity 250ms ease;
+}
+
+.proam__card:hover .proam__media img {
+  transform: scale(1.03);
+}
+
+.proam__cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transform-origin: center;
+  z-index: 500;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.proam__cursor span {
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 981px) {
+  .proam__viewport,
+  .proam__card {
+    cursor: none;
+  }
+}
+
+.proam__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+.proam__lightbox.is-open {
+  display: block;
+}
+
+.proam__lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(10px);
+}
+
+.proam__lightbox-panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: clamp(28px, 4vw, 48px);
+  display: flex;
+  align-items: center;
+}
+
+.proam__lightbox-close {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.proam__lightbox-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.7fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.proam__lightbox-image {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+}
+
+.proam__lightbox-image img {
+  width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  display: block;
+}
+
+.proam__lightbox-title {
+  margin: 14px 0 16px;
+  font-size: clamp(30px, 3.2vw, 56px);
+  line-height: 1;
+  color: var(--fg);
+}
+
+.proam__lightbox-text {
+  margin: 0;
+  max-width: 38ch;
+  color: var(--muted);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.65;
+}
+
+@media (max-width: 980px) {
+  .proam {
+    padding: 88px 0;
+  }
+
+  .proam__viewport,
+  .proam__card {
+    cursor: auto;
+  }
+
+  .proam__cursor {
+    display: none;
+  }
+
+  .proam__track {
+    gap: 18px;
+  }
+
+  .proam__card {
+    width: 62vw;
+  }
+
+  .proam__lightbox-panel {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 72px;
+  }
+
+  .proam__lightbox-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.proam__footer {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.proam__footer-label {
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.proam__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.proam__control {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--fg);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), background 220ms var(--ease-out), border-color 220ms var(--ease-out);
+}
+
+.proam__control:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 241, 234, 0.28);
+}
+
+.proam__control span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .proam__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

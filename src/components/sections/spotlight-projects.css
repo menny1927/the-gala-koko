@@ -1,0 +1,134 @@
+/* spotlight-projects.css (guideline version, adapted names) */
+
+.spotlight,
+.spotlight * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.spotlight {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  padding: 2rem;
+  overflow: hidden;
+
+  /* Option A: reserve space for the right-side names so images can grow without overlap */
+  --names-gutter: 360px; /* tweak 320–420px depending on your longest name */
+}
+
+.spotlight__index #spotlightIndex {
+  text-transform: uppercase;
+  font-size: clamp(3rem, 5vw, 7rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.spotlight__name {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* images */
+.spotlight__images {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(40%, calc(100% - 4rem - var(--names-gutter)));
+
+  padding: 50svh 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: -1;
+}
+
+.spotlight__imgWrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.spotlight__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* names bottom-right */
+.spotlight__names {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.spotlight__names .spotlight__name {
+  color: #4a4a4a;
+  transition: color 0.3s ease;
+}
+
+/* perf hints (same idea as guideline) */
+.spotlight__index #spotlightIndex,
+.spotlight__images,
+.spotlight__names .spotlight__name {
+  will-change: transform;
+}
+
+@media (max-width: 1000px) {
+  .spotlight {
+    --names-gutter: 0px; /* no reserved gutter on mobile */
+  }
+
+  .spotlight__images {
+    width: calc(100% - 4rem);
+    gap: 25svh;
+  }
+
+  .spotlight__names .spotlight__name {
+    color: #fff !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight.is-static {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .spotlight.is-static .spotlight__chrome {
+    display: grid;
+    gap: 32px;
+  }
+
+  .spotlight.is-static .spotlight__images {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 0;
+    width: 100%;
+    padding: 0;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .spotlight.is-static .spotlight__imgWrap {
+    opacity: 1;
+  }
+
+  .spotlight.is-static .spotlight__names {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    align-items: flex-start;
+  }
+}

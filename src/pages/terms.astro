@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import { site } from "../data/site.js";
+import "../styles/global.css";
+---
+
+<Layout
+  title="Terms"
+  description="Website and invitation-request terms for London Annual ProAm."
+>
+  <PageNav />
+  <main class="legalPage" id="main-content">
+    <article>
+      <p class="ui">Last updated 28 July 2026</p>
+      <h1>Terms</h1>
+      <p>
+        This website provides information about London Annual ProAm and a way to prepare an
+        invitation request. Event details may change and should be confirmed directly with the
+        organizers.
+      </p>
+      <h2>Invitation requests</h2>
+      <p>
+        Sending a request does not guarantee an invitation, reservation, ticket, or place at the
+        event. The organizers may accept or decline requests at their discretion.
+      </p>
+      <h2>Website content</h2>
+      <p>
+        Text, photography, artwork, and branding on this website may not be reused commercially
+        without permission. The site is provided as available and may be updated or withdrawn.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        Questions can be sent to
+        <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
+      </p>
+    </article>
+  </main>
+</Layout>

@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import "../styles/global.css";
+import "../components/sections/radial-gallery.css";
+---
+
+<Layout
+  title="Gallery"
+  description="Explore sixty visual moments from previous London Annual ProAm editions."
+>
+  <PageNav />
+  <main class="radial-page" id="main-content">
+    <section class="rg">
+      <div class="rg__cursor" aria-hidden="true"></div>
+      <div class="rg__container">
+        <h1 class="rg__heading">Previous editions</h1>
+        <div class="rg__gallery" aria-label="Previous editions gallery"></div>
+      </div>
+    </section>
+  </main>
+</Layout>

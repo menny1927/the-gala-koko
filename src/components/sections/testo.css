@@ -1,0 +1,130 @@
+.testo,
+.testo * {
+  box-sizing: border-box;
+}
+
+.testo {
+  position: relative;
+  min-height: 180vh; /* scroll room for line-by-line reveal */
+  background: #060606;
+  color: #fff;
+  overflow: clip;
+}
+
+/* Sticky viewport stage */
+.testo-inner {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  padding: clamp(28px, 6vw, 72px);
+
+  isolation: isolate; /* keep z-index stacking local */
+}
+
+/* Cursor circle UNDER text */
+.testo-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+
+  transform: translate(-9999px, -9999px);
+  pointer-events: none;
+  will-change: transform, opacity;
+  opacity: 0;
+
+  z-index: 1;
+}
+
+/* Text ABOVE cursor */
+.testo-lines {
+  position: relative;
+  max-width: 1100px;
+  z-index: 2;
+}
+
+/* Each line */
+.testo-line {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  font-size: clamp(44px, 6.5vw, 92px);
+  color: rgba(255, 255, 255, 0.28); /* starts gray */
+}
+
+.testo-line.is-on {
+  color: rgba(255, 255, 255, 0.96); /* becomes white */
+}
+
+/* Wrapper we split into characters */
+.testo-text {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.testo-ch {
+  display: inline-block;
+  transition: color 120ms ease;
+}
+
+/* When cursor overlaps a character */
+.testo-ch.is-hit {
+  color: #060606; /* black letter on white circle */
+}
+
+/* Author */
+.testo-author {
+  margin-top: 28px;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Big outlined quote mark (right side) */
+.testo-quoteMark {
+  position: absolute;
+  right: clamp(16px, 4vw, 72px);
+  top: 50%;
+  transform: translateY(-42%);
+  font-size: clamp(190px, 25vw, 420px);
+  line-height: 0.8;
+
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 188, 84, 0.95);
+  text-stroke: 2px rgba(255, 188, 84, 0.95);
+
+  opacity: 0.95;
+  pointer-events: none;
+
+  z-index: 0; /* behind everything */
+}
+
+/* Hide system cursor only while section is active */
+.testo.is-active {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testo.is-reduced {
+    min-height: 100svh;
+  }
+
+  .testo.is-reduced .testo-inner {
+    position: relative;
+  }
+
+  .testo.is-reduced .testo-line {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .testo.is-reduced .testo-cursor {
+    display: none;
+  }
+}

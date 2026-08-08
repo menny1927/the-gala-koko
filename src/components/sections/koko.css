@@ -1,0 +1,329 @@
+/* KOKO guideline clone (hero -> koko) */
+
+:root {
+  --light: #fff;
+  --dark: #141414;
+  --accent-1: #ffbc54;
+  --accent-2: #ffbc54;
+}
+
+/* Optional: limit these resets to the page if you prefer */
+.koko,
+.koko * {
+  box-sizing: border-box;
+}
+
+.koko {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--dark);
+  overflow: hidden;
+
+  /* NEW: force default text color in this section */
+  color: #fff;
+}
+
+/* IMPORTANT: override your global img { height:auto } for this section */
+.koko img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* NEW: ensure all typography inside KOKO is white + slightly bigger */
+.koko h1,
+.koko h2,
+.koko p,
+.koko .koko-marker-label {
+  color: #fff;
+}
+
+/* NEW: slightly bigger typography (scoped only to KOKO) */
+.koko h1,
+.koko .koko-content-copy h1 {
+  font-weight: 400;
+  line-height: 1.1;
+  font-size: clamp(3.3rem, 4.4vw, 5.4rem);
+}
+
+.koko h2,
+.koko .koko-content-copy h2 {
+  font-weight: 400;
+  line-height: 1.1;
+  font-size: clamp(1.7rem, 2.5vw, 3.3rem);
+}
+
+.koko p,
+.koko .koko-content-copy p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* The “too big” / “not shrinking” part is usually here */
+.koko-img {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200svh;
+  --overlay-opacity: 0.35;
+  will-change: transform;
+}
+
+.koko-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark);
+  opacity: var(--overlay-opacity);
+  will-change: opacity;
+}
+
+.koko-img-el {
+  will-change: filter;
+}
+
+.koko-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--dark);
+  mask: linear-gradient(var(--light), var(--light)),
+    url("/mask.svg") center/50% no-repeat;
+  -webkit-mask: linear-gradient(var(--light), var(--light)),
+    url("/mask.svg") center/50% no-repeat;
+  mask-composite: subtract;
+  -webkit-mask-composite: subtract;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.koko-grid-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 55%;
+  will-change: opacity;
+}
+
+.koko-grid-overlay img {
+  opacity: 0.25;
+}
+
+.koko-marker {
+  position: absolute;
+  transform: translateY(-50%); /* dot sits on the point; label extends right */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  will-change: opacity;
+}
+
+.koko-marker-1 {
+  top: 45svh;
+  left: 51vw;
+}
+
+.koko-marker-2 {
+  top: 74svh;
+  left: 32vw;
+}
+
+.koko-marker .koko-marker-label {
+  text-transform: uppercase;
+  font-family: "DM Mono";
+  font-size: 0.8rem; /* was 0.7rem */
+  font-weight: 500;
+  padding: 0.3rem 0.6rem; /* slightly bigger */
+  border-radius: 0.25rem;
+}
+
+.koko-marker .koko-marker-icon {
+  position: relative;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2rem;
+}
+
+.koko-marker .koko-marker-icon:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  animation: pulse 1.5s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+/* Keep accents for marker dots + background, but force label text to white */
+.koko-marker.koko-marker-1 .koko-marker-icon,
+.koko-marker.koko-marker-1 .koko-marker-icon::before,
+.koko-marker.koko-marker-1 .koko-marker-label {
+  background-color: var(--accent-1);
+  color: #fff;
+}
+
+.koko-marker.koko-marker-2 .koko-marker-icon,
+.koko-marker.koko-marker-2 .koko-marker-icon::before,
+.koko-marker.koko-marker-2 .koko-marker-label {
+  background-color: var(--accent-2);
+  color: #fff; /* changed from var(--dark) */
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.koko-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400svh;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.koko-content .koko-content-block {
+  width: 100%;
+  height: 100svh;
+  padding: 4rem;
+  display: flex;
+}
+
+.koko-content .koko-content-copy {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem; /* was 0.25rem */
+}
+
+.koko-content .koko-content-block:nth-child(1) {
+  align-items: flex-end;
+}
+
+.koko-content .koko-content-block:nth-child(2),
+.koko-content .koko-content-block:nth-child(4) {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.koko-content .koko-content-block:nth-child(3) {
+  align-items: center;
+}
+
+.koko-scroll-progress-bar {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: 0.1rem;
+  height: 10rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  --progress: 0;
+}
+
+.koko-scroll-progress-bar::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--light);
+  transform-origin: top;
+  transform: scaleY(var(--progress));
+  will-change: transform;
+}
+
+@media (max-width: 800px) {
+  .koko-mask {
+    mask: linear-gradient(var(--light), var(--light)),
+      url("/mask.svg") center/75% no-repeat;
+    -webkit-mask: linear-gradient(var(--light), var(--light)),
+      url("/mask.svg") center/75% no-repeat;
+    mask-composite: subtract;
+    -webkit-mask-composite: subtract;
+  }
+
+  .koko-grid-overlay {
+    width: 100%;
+  }
+
+  .koko-marker-1 {
+    top: 46svh;
+    left: 42vw;
+  }
+
+  .koko-marker-2 {
+    top: 66svh;
+    left: 22vw;
+  }
+
+  .koko-content .koko-content-block {
+    padding: 1.5rem;
+  }
+
+  .koko-content .koko-content-copy {
+    width: 75%;
+  }
+
+  .koko-scroll-progress-bar {
+    right: 1rem;
+  }
+
+  /* NEW: mobile bump too (optional but keeps “slightly bigger” consistent) */
+  .koko p,
+  .koko .koko-content-copy p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .koko.is-static {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .koko.is-static .koko-img {
+    position: relative;
+    height: 70svh;
+  }
+
+  .koko.is-static .koko-mask,
+  .koko.is-static .koko-grid-overlay,
+  .koko.is-static .koko-marker,
+  .koko.is-static .koko-scroll-progress-bar {
+    display: none;
+  }
+
+  .koko.is-static .koko-content {
+    position: relative;
+    height: auto;
+  }
+
+  .koko.is-static .koko-content .koko-content-block {
+    height: auto;
+    min-height: 0;
+    padding: 48px var(--gutter);
+  }
+
+  .koko.is-static .koko-content .koko-content-copy {
+    width: min(680px, 100%);
+  }
+}

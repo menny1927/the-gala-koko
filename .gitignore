@@ -22,3 +22,16 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local high-resolution source media (optimized copies live in public/)
+source-assets/
+
+# local exports and debugging snapshots
+_debug/
+Full-09-03/
+all-src-code.txt
+src_scripts_dump_clean.txt
+dump.txt
+
+# local scratch / debug artifacts
+tmp/

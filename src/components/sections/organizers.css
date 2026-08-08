@@ -1,0 +1,121 @@
+/* Organizers spotlight clone (spotlight -> orgSpotlight) */
+
+.orgIntro,
+.orgOutro,
+.orgSpotlight,
+.orgIntro *,
+.orgOutro *,
+.orgSpotlight * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.orgIntro img,
+.orgOutro img,
+.orgSpotlight img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Scope typography so you don't override the whole site */
+.orgIntro,
+.orgOutro,
+.orgSpotlight {
+  font-family: "Instrument Serif", sans-serif;
+}
+
+.orgIntro h1,
+.orgOutro h1,
+.orgSpotlight h1 {
+  font-size: clamp(2rem, 10vw, 5rem);
+  font-weight: 500;
+  letter-spacing: -0.1rem;
+  line-height: 0.9;
+}
+
+.orgIntro,
+.orgOutro,
+.orgSpotlight {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  padding: 1rem;
+  align-content: center;
+  overflow: hidden;
+}
+
+.orgIntro h1,
+.orgOutro h1,
+.orgSpotlight h1 {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  color: #141414;
+}
+
+.orgIntro,
+.orgOutro {
+  background-color: #d7dbd2;
+}
+
+.orgSpotlight {
+  background-color: #edf1e8;
+}
+
+.orgSpotlightImages {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.orgSpotlightImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(20rem, 25vw, 40rem);
+  aspect-ratio: 7 / 5;
+  border-radius: 0.5rem;
+  transform: translate(-50%, 200%);
+  will-change: transform;
+  overflow: hidden;
+}
+
+@media (max-width: 1000px) {
+  .orgIntro h1,
+  .orgOutro h1,
+  .orgSpotlight h1 {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orgSpotlight.is-static {
+    height: auto;
+    min-height: 100svh;
+    padding: 100px 24px 48px;
+    overflow: visible;
+  }
+
+  .orgSpotlight.is-static .orgSpotlightImages {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    height: auto;
+    margin-top: 36px;
+  }
+
+  .orgSpotlight.is-static .orgSpotlightImg {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none !important;
+  }
+}

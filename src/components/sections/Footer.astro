@@ -1,0 +1,49 @@
+---
+import "./footer.css";
+import { site } from "../../data/site.js";
+---
+
+<section class="footerScene" id="footer">
+  <div class="container footerInner">
+    <div class="footerTop">
+      <div>
+        <div class="ui">London Annual ProAm</div>
+        <h2 class="h2" style="margin-top: 14px; max-width: 20ch;">
+          Request details, see the venue, and join the next edition.
+        </h2>
+      </div>
+
+      <div class="footerLinks">
+        <button class="btn" type="button" data-request-open>Request invitation</button>
+        <a class="btn" href="/venue">View venue</a>
+        <a class="btn" href="/location">View location</a>
+      </div>
+    </div>
+
+    <div class="rule" style="margin: 28px 0;"></div>
+
+    <div class="footerBottom">
+      <div class="footerCols">
+        <div class="footerCol">
+          <div class="ui">Contact</div>
+          <a class="footerA" href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+        </div>
+
+        <div class="footerCol">
+          <div class="ui">Navigate</div>
+          <a class="footerA" href="/#past-events">Past events</a>
+          <a class="footerA" href="/#experience">Experience</a>
+          <button class="footerA footerAButton" type="button" data-request-open>Request</button>
+        </div>
+
+        <div class="footerCol">
+          <div class="ui">Legal</div>
+          <a class="footerA" href="/privacy">Privacy</a>
+          <a class="footerA" href="/terms">Terms</a>
+        </div>
+      </div>
+
+      <p class="ui" style="opacity: 0.7;">© 2026 London ProAm</p>
+    </div>
+  </div>
+</section>

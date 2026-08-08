@@ -1,0 +1,38 @@
+---
+interface Props {
+	label?: string;
+}
+
+const { label = "Back home" } = Astro.props;
+---
+
+<nav class="pageNav" aria-label="Page navigation">
+  <a href="/">{label}</a>
+</nav>
+
+<style>
+  .pageNav {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 9000;
+  }
+
+  .pageNav a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    padding: 10px 16px;
+    border: 1px solid rgba(245, 241, 234, 0.24);
+    border-radius: 999px;
+    background: rgba(7, 7, 7, 0.64);
+    color: #f5f1ea;
+    text-decoration: none;
+    backdrop-filter: blur(12px);
+  }
+
+  .pageNav a:focus-visible {
+    outline: 2px solid #f5f1ea;
+    outline-offset: 3px;
+  }
+</style>

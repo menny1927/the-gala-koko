@@ -1,0 +1,123 @@
+---
+import "./proam.css";
+
+const items = [
+  { title: "CHRISTINE & DAMIR", image: "/proam/img1.webp" },
+  { title: "COCO & SALVO", image: "/proam/img2.webp" },
+  { title: "EKATERINA & PASHA", image: "/proam/img3.webp" },
+  { title: "FLORA & SPENCER", image: "/proam/img4.webp" },
+  { title: "HENRIETA & MASSIMO", image: "/proam/img5.webp" },
+  { title: "LIAN & MIRKO", image: "/proam/img6.webp" },
+  { title: "LILIAN & CARLOS", image: "/proam/img7.webp" },
+  { title: "LUCY & MIRCO", image: "/proam/img8.webp" },
+  { title: "PATTY & ROMAN", image: "/proam/img9.webp" },
+  { title: "PINKY & GIUSEPPE", image: "/proam/img10.webp" },
+  { title: "SABRINA & FABRIZIO", image: "/proam/img11.webp" },
+  { title: "ALEX & PASHA WITH SHINSUKE & MICHIKO", image: "/proam/img12.webp" },
+  { title: "KRISTINA & SERGEY", image: "/proam/img13.webp" },
+  { title: "LILIAN & AUSTIN", image: "/proam/img14.webp" },
+  { title: "MARION & COSIMO", image: "/proam/img15.webp" },
+  { title: "OLGA & JUSTINAS WITH NICOLE & RAFAEL", image: "/proam/img16.webp" },
+  { title: "RITA & MICHAEL", image: "/proam/img17.webp" },
+  { title: "WINNIE & YURI", image: "/proam/img18.webp" },
+  { title: "YUMI WITH VICTOR, NIKITA & VLAD", image: "/proam/img19.webp" },
+  { title: "TEAM ALLAN", image: "/proam/img20.webp" },
+  { title: "TEAM DMITRII", image: "/proam/img21.webp" },
+  { title: "TEAM LENE", image: "/proam/img22.webp" },
+  { title: "TEAM TIMOTHY", image: "/proam/img23.webp" },
+  { title: "TEAM ARUNAS", image: "/proam/img24.webp" },
+  { title: "TEAM HANNA", image: "/proam/img25.webp" },
+  { title: "TEAM SLAVIK", image: "/proam/img26.webp" },
+  { title: "TEAM JASON", image: "/proam/img27.webp" }
+];
+
+const loopItems = [...items, ...items];
+---
+
+<section class="proam" id="proam" aria-label="PRO-AM GALLERY">
+  <div class="proam__viewport" data-proam-track-wrap>
+    <div class="proam__track" data-proam-track>
+      {loopItems.map((item, index) => (
+        <button
+          class="proam__card"
+          type="button"
+          data-proam-open
+          data-title={item.title}
+          data-image={item.image}
+          aria-label={`OPEN ${item.title} ${index + 1}`}
+        >
+          <div class="proam__media">
+            <img
+              src={item.image}
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="proam__footer container">
+    <div class="proam__controls" aria-label="GALLERY CONTROLS">
+      <button
+        class="proam__control"
+        type="button"
+        data-proam-speed="reverse"
+        aria-label="MOVE GALLERY BACKWARD"
+      >
+        <span>←</span>
+      </button>
+
+      <button
+        class="proam__control"
+        type="button"
+        data-proam-speed="forward"
+        aria-label="MOVE GALLERY FORWARD"
+      >
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="proam__cursor" data-proam-cursor aria-hidden="true">
+    <span>ENLARGE</span>
+  </div>
+
+  <div
+    class="proam__lightbox"
+    data-proam-lightbox
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="proam-lightbox-title"
+    aria-hidden="true"
+  >
+    <div class="proam__lightbox-backdrop" data-proam-close></div>
+
+    <div class="proam__lightbox-panel" tabindex="-1">
+      <button
+        class="proam__lightbox-close"
+        type="button"
+        data-proam-close
+        aria-label="CLOSE"
+      >
+        ✕
+      </button>
+
+      <div class="proam__lightbox-grid">
+        <div class="proam__lightbox-image">
+          <img alt="" data-proam-lightbox-image />
+        </div>
+
+        <div class="proam__lightbox-copy">
+          <h3
+            class="proam__lightbox-title"
+            id="proam-lightbox-title"
+            data-proam-lightbox-title
+          ></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

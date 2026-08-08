@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import "../styles/global.css";
+import "../components/sections/koko.css";
+---
+
+<Layout
+  title="Location"
+  description="Find KOKO Theatre in Camden and plan your arrival for The Gala."
+>
+  <PageNav />
+  <main id="main-content">
+    <section class="koko">
+      <div class="koko-img">
+        <img class="koko-img-el" src="/images/london-map.svg" alt="Map of central London" />
+      </div>
+
+      <div class="koko-mask"></div>
+
+      <div class="koko-grid-overlay">
+        <img src="/grid-overlay.svg" alt="" />
+      </div>
+
+      <div class="koko-marker koko-marker-1">
+        <span class="koko-marker-icon"></span>
+        <p class="koko-marker-label">KOKO Theatre</p>
+      </div>
+
+      <div class="koko-marker koko-marker-2">
+        <span class="koko-marker-icon"></span>
+        <p class="koko-marker-label">Royal Albert Hall</p>
+      </div>
+
+      <div class="koko-content">
+        <div class="koko-content-block">
+          <div class="koko-content-copy">
+            <h1>KOKO Theatre</h1>
+          </div>
+        </div>
+
+        <div class="koko-content-block">
+          <div class="koko-content-copy">
+            <h2>Address</h2>
+            <p>1A Camden High St, London NW1 7JE.</p>
+          </div>
+        </div>
+
+        <div class="koko-content-block">
+          <div class="koko-content-copy">
+            <h2>Arrival</h2>
+            <p>Please arrive early for check-in and a smooth start.</p>
+          </div>
+        </div>
+
+        <div class="koko-content-block">
+          <div class="koko-content-copy">
+            <h2>Nearest station</h2>
+            <p>Camden Town Underground.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="koko-scroll-progress-bar"></div>
+    </section>
+  </main>
+
+</Layout>

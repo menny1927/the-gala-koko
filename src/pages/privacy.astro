@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import { site } from "../data/site.js";
+import "../styles/global.css";
+---
+
+<Layout
+  title="Privacy"
+  description="Privacy information for the London Annual ProAm website."
+>
+  <PageNav />
+  <main class="legalPage" id="main-content">
+    <article>
+      <p class="ui">Last updated 28 July 2026</p>
+      <h1>Privacy</h1>
+      <p>
+        This website does not create user accounts, set advertising cookies, or run analytics.
+        Invitation requests are prepared in your own email application; the website does not store
+        the form contents.
+      </p>
+      <h2>Email requests</h2>
+      <p>
+        If you choose to send an invitation request, your email provider and the recipient’s email
+        provider process the information under their own privacy terms. Only include information
+        you are comfortable sharing for the purpose of discussing the event.
+      </p>
+      <h2>Hosting data</h2>
+      <p>
+        The hosting provider may temporarily process standard technical logs, such as IP address,
+        browser type, requested page, and request time, to deliver and secure the site.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        Questions about this notice can be sent to
+        <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
+      </p>
+    </article>
+  </main>
+</Layout>

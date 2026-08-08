@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import "../styles/global.css";
+
+import Organizers from "../components/sections/organizers.astro";
+import "../components/sections/organizers.css";
+---
+
+<Layout
+  title="Organizers"
+  description="Meet the people shaping each edition of London Annual ProAm."
+>
+  <PageNav />
+  <main class="grain" id="main-content">
+    <Organizers />
+  </main>
+</Layout>

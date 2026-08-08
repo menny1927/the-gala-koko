@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import KnockGate from "../components/sections/KnockGate.astro";
+import Hero from "../components/sections/Hero.astro";
+import Experience from "../components/sections/Experience.astro";
+import RequestInvite from "../components/sections/RequestInvite.astro";
+import Prova from "../components/sections/prova.astro";
+import "../components/sections/prova.css";
+import PastEventsScatter from "../components/sections/PastEventsScatter.astro";
+import "../components/sections/past-events-scatter.css";
+import Testo from "../components/sections/Testo.astro";
+import "../components/sections/testo.css";
+import ProAm from "../components/sections/proam.astro";
+import Footer from "../components/sections/Footer.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="The Gala Meets KOKO">
+  <main class="grain" id="main-content">
+    <KnockGate />
+    <Hero />
+    <Prova />
+    <ProAm />
+    <Testo />
+    <Experience />
+    <PastEventsScatter />
+    <RequestInvite />
+    <Footer />
+  </main>
 </Layout>

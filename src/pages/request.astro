@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import RequestForm from "../components/RequestForm.astro";
+import "../styles/global.css";
+---
+
+<Layout
+  title="Request an Invitation"
+  description="Prepare an invitation request for The Gala at KOKO Theatre."
+>
+  <PageNav />
+  <main class="simplePage" id="main-content">
+    <div class="simplePage__inner">
+      <p class="ui">Invitation only</p>
+      <h1 class="h1">Request your invitation</h1>
+      <p class="p">
+        Share your details and tell us what you'd like to experience. Submitting this form opens
+        your email application so you can review the request before sending it.
+      </p>
+      <RequestForm idPrefix="request-page" className="simplePage__form" />
+    </div>
+  </main>
+</Layout>

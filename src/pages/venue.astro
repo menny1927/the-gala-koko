@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageNav from "../components/PageNav.astro";
+import "../styles/global.css";
+import "../components/sections/spotlight-projects.css";
+---
+
+<Layout
+  title="Venue"
+  description="Step inside KOKO Theatre and explore the setting for The Gala."
+>
+  <PageNav />
+  <main class="grain" id="main-content">
+    <section class="spotlight" id="spotlight">
+      <h1 class="sr-only">KOKO Theatre venue</h1>
+      <div class="spotlight__chrome">
+        <div class="spotlight__index">
+          <p id="spotlightIndex" aria-hidden="true">01/08</p>
+        </div>
+
+        <div class="spotlight__images" id="spotlightImages" aria-hidden="true">
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img1.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img2.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img3.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img4.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img5.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img6.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img7.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+          <div class="spotlight__imgWrap">
+            <img class="spotlight__img" src="/spotlight/img8.webp" alt="" loading="lazy" decoding="async" />
+          </div>
+        </div>
+
+        <div class="spotlight__names">
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">The Exterior</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">Theatre View</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">Loggia View</span>
+          </p>
+          
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">Main Bar</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">The Balcony</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">The Stage</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">Private Lounge</span>
+          </p>
+
+          <p class="spotlight__name">
+            <span class="spotlight__nameMain">Evening View</span>
+          </p>
+
+          <a class="btn" href="/" style="margin-top: 14px; display: inline-flex;">
+            Back home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

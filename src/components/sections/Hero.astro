@@ -1,0 +1,230 @@
+---
+import "./Hero.css";
+---
+
+<section class="heroShowcase" id="hero" aria-label="The Gala experience">
+  <div class="heroHorizontal" data-hero-horizontal aria-label="The Gala highlights">
+    <!-- Opening: theatre lights rise, the logo appears, then the story emerges in place -->
+    <div class="heroOpening" data-hero-opening aria-label="The theatre lights rise">
+      <div class="heroPrelude__halo" data-hero-halo aria-hidden="true"></div>
+      <div class="heroPrelude__beam" data-hero-beam aria-hidden="true"></div>
+      <div class="heroPrelude__smoke heroPrelude__smoke--a" data-hero-smoke aria-hidden="true"></div>
+      <div class="heroPrelude__smoke heroPrelude__smoke--b" data-hero-smoke aria-hidden="true"></div>
+      <div class="heroPrelude__dust" data-hero-dust aria-hidden="true"></div>
+      <div class="heroPrelude__pool" data-hero-pool aria-hidden="true"></div>
+
+      <div class="heroPrelude__brand" data-hero-light-brand>
+        <img
+          src="/brand/the-gala-logo-gold.png"
+          alt="The Gala"
+          width="900"
+          height="575"
+          loading="eager"
+          decoding="async"
+        />
+        <p>The curtain rises.</p>
+      </div>
+
+      <p class="heroPrelude__prompt" data-hero-light-prompt>
+        <span>Scroll to raise the lights</span>
+        <span aria-hidden="true">↓</span>
+      </p>
+    </div>
+
+    <div class="heroHorizontal__track" data-hero-track>
+
+  <!-- Concept 01: cinematic, atmosphere-first -->
+  <article
+    class="heroConcept heroConcept--cinematic"
+    id="hero-concept-1"
+    data-hero-concept="cinematic"
+    aria-labelledby="hero-concept-1-title"
+  >
+    <div class="heroCinematic__backdrop" data-hero-parallax aria-hidden="true"></div>
+    <div class="heroCinematic__wash" aria-hidden="true"></div>
+    <img class="heroBrandLogo" src="/brand/the-gala-logo-gold.png" alt="" width="900" height="575" loading="eager" decoding="async" />
+
+    <div class="heroCinematic__layout">
+      <div class="heroCinematic__copy" data-hero-copy>
+        <p class="heroConcept__eyebrow">London · 11 October 2026 · One night only</p>
+        <h1 class="heroCinematic__title" id="hero-concept-1-title">
+          <span>The greatest</span>
+          <em>show.</em>
+        </h1>
+        <p class="heroConcept__lead">
+          An immersive theatrical production where ProAm performance, fine dining and storytelling share one
+          historic stage.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Concept 02: editorial, story-first -->
+  <article
+    class="heroConcept heroConcept--editorial"
+    id="hero-concept-2"
+    data-hero-concept="editorial"
+    aria-labelledby="hero-concept-2-title"
+  >
+    <img class="heroBrandLogo" src="/brand/the-gala-logo-gold.png" alt="" width="900" height="575" loading="lazy" decoding="async" />
+
+    <div class="heroEditorial__layout">
+      <h2 class="heroEditorial__title" id="hero-concept-2-title">
+        Extraordinary souls
+        <em>take centre stage.</em>
+      </h2>
+
+      <figure class="heroEditorial__portrait" data-hero-media>
+        <video
+          class="heroConcept__video"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/images/heroes/inside-the-story.webp"
+          data-hero-video
+          aria-hidden="true"
+        >
+          <source src="/videos/heroes/inside-the-story.mp4" type="video/mp4" />
+        </video>
+      </figure>
+
+      <div class="heroEditorial__copy" data-hero-copy>
+        <p class="heroConcept__eyebrow">Where dance becomes story</p>
+        <p class="heroEditorial__lead">
+          Every artist becomes a featured performer—every act a chapter, built through character, stage presence
+          and an emotional journey.
+        </p>
+        <button class="heroCta heroCta--light" type="button" data-request-open aria-controls="request-overlay">
+          Discover how to take part <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </div>
+  </article>
+
+  <!-- Concept 03: energetic, competition-first -->
+  <article
+    class="heroConcept heroConcept--clash"
+    id="hero-concept-3"
+    data-hero-concept="clash"
+    aria-labelledby="hero-concept-3-title"
+  >
+    <div class="heroClash__grid" aria-hidden="true"></div>
+    <img class="heroBrandLogo" src="/brand/the-gala-logo-gold.png" alt="" width="900" height="575" loading="lazy" decoding="async" />
+
+    <div class="heroClash__stage">
+      <div class="heroClash__image heroClash__image--left" data-hero-left aria-hidden="true">
+        <img src="/proam/img20.webp" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="heroClash__image heroClash__image--right" data-hero-right aria-hidden="true">
+        <img src="/proam/img21.webp" alt="" loading="lazy" decoding="async" />
+      </div>
+
+      <div class="heroClash__copy" data-hero-copy>
+        <p class="heroConcept__eyebrow">A new team-match concept</p>
+        <h2 class="heroClash__title" id="hero-concept-3-title">
+          <span class="heroClash__titleTop">Titans</span>
+          <span class="heroClash__titleBottom">collide.</span>
+        </h2>
+        <p class="heroClash__lead">
+          Dance-world Titans lead teams of ProAm couples into original show numbers. They battle head-to-head.
+          The audience crowns the winner.
+        </p>
+        <button class="heroCta heroCta--red" type="button" data-request-open aria-controls="request-overlay">
+          Ask about participating <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+
+      <div class="heroClash__orbit" data-hero-orbit aria-hidden="true">
+        <span>CLASH OF THE TITANS · TEAM MATCH ·</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- Concept 04: architectural, venue-first -->
+  <article
+    class="heroConcept heroConcept--stage"
+    id="hero-concept-4"
+    data-hero-concept="stage"
+    aria-labelledby="hero-concept-4-title"
+  >
+    <img class="heroBrandLogo" src="/brand/the-gala-logo-gold.png" alt="" width="900" height="575" loading="lazy" decoding="async" />
+
+    <div class="heroStage__layout">
+      <div class="heroStage__copy" data-hero-copy>
+        <p class="heroConcept__eyebrow">KOKO Theatre · London</p>
+        <h2 class="heroStage__title" id="hero-concept-4-title">
+          A theatre.
+          <em>Not a ballroom.</em>
+        </h2>
+        <p class="heroStage__lead">
+          Perform beneath theatrical lighting on one of London’s most historic stages—inside a production made for
+          wonder, mystery and transformation.
+        </p>
+        <div class="heroConcept__actions">
+          <button class="heroCta heroCta--light" type="button" data-request-open aria-controls="request-overlay">
+            Request full details <span aria-hidden="true">↗</span>
+          </button>
+          <a class="heroTextLink" href="/venue">Explore KOKO <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="heroStage__window" data-hero-media>
+        <img src="/images/hero.jpg" alt="The stage inside KOKO Theatre" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </article>
+
+    </div>
+
+    <nav class="heroProgress" data-hero-progress aria-label="Gala highlights progress">
+      <div class="heroProgress__line" aria-hidden="true">
+        <span class="heroProgress__fill"></span>
+      </div>
+      <ol>
+        <li class="is-active" data-hero-progress-item aria-current="step">
+          <span>01</span><strong>The greatest show</strong>
+        </li>
+        <li data-hero-progress-item>
+          <span>02</span><strong>VIP ProAm showcases</strong>
+        </li>
+        <li data-hero-progress-item>
+          <span>03</span><strong>Clash of the Titans ProAm team match</strong>
+        </li>
+        <li data-hero-progress-item>
+          <span>04</span><strong>Dinner dance experience</strong>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Concept 05: direct-response, invitation-first -->
+  <article
+    class="heroConcept heroConcept--invitation"
+    id="hero-concept-5"
+    data-hero-concept="invitation"
+    aria-labelledby="hero-concept-5-title"
+  >
+    <div class="heroInvitation__veil" aria-hidden="true"></div>
+    <div class="heroInvitation__spotlight" data-hero-spotlight aria-hidden="true"></div>
+    <img class="heroBrandLogo" src="/brand/the-gala-logo-gold.png" alt="" width="900" height="575" loading="lazy" decoding="async" />
+
+    <div class="heroInvitation__copy" data-hero-copy>
+      <p class="heroConcept__eyebrow">The Gala meets KOKO</p>
+      <h2 class="heroInvitation__title" id="hero-concept-5-title">
+        One night.<br />
+        One stage.<br />
+        <em>Your invitation.</em>
+      </h2>
+      <p class="heroInvitation__lead">
+        Step inside an evening of live performance, fine dining and immersive theatrical storytelling. Tell us how
+        you would like to experience it.
+      </p>
+      <button class="heroInvitation__cta" type="button" data-request-open aria-controls="request-overlay">
+        <span>Request invitation</span>
+        <span class="heroInvitation__ctaArrow" aria-hidden="true">↗</span>
+      </button>
+      <p class="heroInvitation__note">KOKO Theatre, London · 11 October 2026</p>
+    </div>
+  </article>
+</section>

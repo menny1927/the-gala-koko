@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# London Annual ProAm
+
+Static Astro website for The Gala at KOKO Theatre.
+
+## Requirements
+
+- Node.js 22.12 or newer
+- npm
+
+## Local development
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Quality checks
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```sh
+npm run verify
+npm run audit:prod
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Production
 
-## 🧞 Commands
+```sh
+npm ci
+npm run build
+```
 
-All commands are run from the root of the project, from a terminal:
+Deploy the generated `dist/` directory to a static host.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Set `PUBLIC_SITE_URL` to the final HTTPS origin so canonical and social URLs are absolute. Set
+`PUBLIC_CONTACT_EMAIL` to the inbox that should receive invitation requests. Requests are prepared
+in the visitor's email application; this project does not require a form backend.
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+High-resolution source photography is retained locally under the ignored `source-assets/`
+directory. Web-optimized copies are served from `public/`.

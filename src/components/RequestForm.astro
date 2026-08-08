@@ -1,0 +1,97 @@
+---
+import { site } from "../data/site.js";
+import { countries } from "../data/countries.js";
+
+interface Props {
+	idPrefix?: string;
+	className?: string;
+}
+
+const { idPrefix = "request", className = "" } = Astro.props;
+
+const interests = [
+  { value: "VIP Showcase", id: "vip" },
+  { value: "ProAm Team Match", id: "proam" },
+  { value: "Dinner Dance", id: "dinner" },
+];
+---
+
+<form
+  class:list={["form", className]}
+  data-request-form
+  data-contact-email={site.contactEmail}
+  action={`mailto:${site.contactEmail}`}
+  method="post"
+  enctype="text/plain"
+>
+  <div class="field">
+    <label class="ui" for={`${idPrefix}-name`}>Name <span aria-hidden="true">*</span></label>
+    <input
+      class="input"
+      id={`${idPrefix}-name`}
+      name="name"
+      type="text"
+      autocomplete="name"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label class="ui" for={`${idPrefix}-email`}>Email <span aria-hidden="true">*</span></label>
+    <input
+      class="input"
+      id={`${idPrefix}-email`}
+      name="email"
+      type="email"
+      autocomplete="email"
+      inputmode="email"
+      required
+    />
+  </div>
+
+  <div class="field">
+    <label class="ui" for={`${idPrefix}-phone`}>Phone <span class="field__hint">(optional)</span></label>
+    <input
+      class="input"
+      id={`${idPrefix}-phone`}
+      name="phone"
+      type="tel"
+      autocomplete="tel"
+      inputmode="tel"
+    />
+  </div>
+
+  <div class="field">
+    <label class="ui" for={`${idPrefix}-country`}>Country <span class="field__hint">(optional)</span></label>
+    <select class="input select" id={`${idPrefix}-country`} name="country" autocomplete="country-name">
+      <option value="">Select a country</option>
+      {countries.map((country) => <option value={country}>{country}</option>)}
+    </select>
+  </div>
+
+  <fieldset class="fieldset" data-request-interests>
+    <legend class="ui">I'm interested in <span aria-hidden="true">*</span></legend>
+    <p class="fieldset__hint">Select at least one.</p>
+
+    <div class="checkGroup">
+      {interests.map((interest) => (
+        <label class="check" for={`${idPrefix}-${interest.id}`}>
+          <input
+            class="check__input"
+            id={`${idPrefix}-${interest.id}`}
+            type="checkbox"
+            name="interest"
+            value={interest.value}
+          />
+          <span class="check__box" aria-hidden="true"></span>
+          <span class="check__label">{interest.value}</span>
+        </label>
+      ))}
+    </div>
+
+    <p class="fieldset__error" data-request-interests-error role="alert"></p>
+  </fieldset>
+
+  <button class="btn btn--gold" type="submit">Send email request</button>
+  <p class="formStatus" data-request-status role="status" aria-live="polite"></p>
+</form>

@@ -1,0 +1,60 @@
+---
+import "./RequestInvite.css";
+import RequestForm from "../RequestForm.astro";
+---
+
+<section
+  class="request-overlay"
+  id="request-overlay"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="request-title"
+>
+  <div class="request-overlay__backdrop"></div>
+
+  <div class="request-overlay__panel" tabindex="-1">
+    <button class="request-overlay__close" type="button" aria-label="Close request form">
+      ✕
+    </button>
+
+    <div class="request-popup">
+      <!-- LEFT -->
+      <div class="request-popup__left">
+        <h2 class="h2" id="request-title" style="margin-top: 16px;">Request Your Invitation</h2>
+        <p class="p" style="margin-top: 14px;">
+          Leave your contact details and tell us what you'd like to experience. Availability is
+          limited.
+        </p>
+
+        <RequestForm
+          idPrefix="request-modal"
+          className="request-popup__form"
+        />
+      </div>
+
+      <!-- RIGHT -->
+      <div class="request-popup__right">
+        <div class="request-popup__copy">
+          <h3 class="request-popup__side-title">Private Luxury Evening</h3>
+
+          <p class="request-popup__text">
+            The Gala at KOKO Theatre is an intimate, invitation-only evening.
+          </p>
+
+          <p class="request-popup__text">
+            With limited cabaret-style seating, we are carefully curating the guest list to preserve the unique atmosphere of elegance, performance, and connection that defines this special night.
+          </p>
+
+          <p class="request-popup__text">
+            Please leave your contact details and select what you'd like to experience. Our team will personally share the full details with you.
+          </p>
+        </div>
+
+        <div class="request-popup__image-card">
+          <img src="/images/hero.jpg" alt="KOKO Theatre atmosphere" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
