@@ -3,6 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import PageNav from "../components/PageNav.astro";
 import "../styles/global.css";
 import "../components/sections/koko.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+
+// With a key we render a live TomTom vector map (real zoom, geo-anchored pins).
+// Without one we fall back to the exported still, so the page never breaks.
+const tomtomKey = import.meta.env.PUBLIC_TOMTOM_KEY ?? "";
+const useLiveMap = Boolean(tomtomKey);
 ---
 
 <Layout
@@ -12,20 +18,24 @@ import "../components/sections/koko.css";
   <PageNav />
   <main id="main-content">
     <section class="koko">
-      <div class="koko-img">
-        <img class="koko-img-el" src="/images/london-map.webp" alt="Map of central London" />
+      <div class="koko-img" data-koko-live={useLiveMap ? "true" : null}>
+        {useLiveMap ? (
+          <div class="koko-map" data-koko-map data-tomtom-key={tomtomKey}></div>
+        ) : (
+          <>
+            <img class="koko-img-el" src="/images/london-map.webp" alt="Map of central London" />
 
-        {/* Anchored to the map itself (percentages), so they stay on the venues
-            whatever the viewport crops. */}
-        <div class="koko-marker koko-marker-1">
-          <span class="koko-marker-icon"></span>
-          <p class="koko-marker-label">KOKO Theatre</p>
-        </div>
+            <div class="koko-marker koko-marker-1">
+              <span class="koko-marker-icon"></span>
+              <p class="koko-marker-label">KOKO Theatre</p>
+            </div>
 
-        <div class="koko-marker koko-marker-2">
-          <span class="koko-marker-icon"></span>
-          <p class="koko-marker-label">Royal Albert Hall</p>
-        </div>
+            <div class="koko-marker koko-marker-2">
+              <span class="koko-marker-icon"></span>
+              <p class="koko-marker-label">Royal Albert Hall</p>
+            </div>
+          </>
+        )}
       </div>
 
       <div class="koko-mask"></div>

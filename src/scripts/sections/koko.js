@@ -13,6 +13,15 @@ export function initKoko() {
     return;
   }
 
+  // A TomTom key renders the real vector map, which can actually zoom.
+  // Without one we keep the exported still below.
+  const mapEl = koko.querySelector("[data-koko-map]");
+  if (mapEl) {
+    return import("./kokoLiveMap.js").then(({ initKokoLiveMap }) =>
+      initKokoLiveMap(koko, mapEl)
+    );
+  }
+
   const kokoImg = koko.querySelector(".koko-img");
   const kokoImgEl = koko.querySelector(".koko-img-el");
   const kokoMask = koko.querySelector(".koko-mask");

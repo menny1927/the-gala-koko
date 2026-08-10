@@ -352,3 +352,31 @@
 .koko-attribution a:hover {
   color: rgba(255, 255, 255, 0.72);
 }
+
+/* --- Live TomTom map (used when PUBLIC_TOMTOM_KEY is set) --- */
+/* The camera does the travelling, so the box is a single viewport rather than
+   the 200svh strip the static image needs to pan through. */
+.koko-img[data-koko-live] {
+  height: 100svh;
+}
+
+.koko-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark);
+}
+
+/* Fade the map in once tiles have drawn, so there is no grey flash */
+.koko-map .maplibregl-canvas { opacity: 0; transition: opacity 600ms ease; }
+.koko.is-map-ready .koko-map .maplibregl-canvas { opacity: 1; }
+
+/* Markers are geo-anchored by MapLibre; keep them clear of its default styling */
+.koko-map .koko-marker {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  white-space: nowrap;
+}
