@@ -49,6 +49,15 @@ const socialImage = configuredSiteUrl
 
 	<body>
 		<a class="skip-link" href="#main-content">Skip to main content</a>
+
+		<div class="rotateNotice">
+			<div class="rotateNotice__inner">
+				<span class="rotateNotice__icon" aria-hidden="true">⟳</span>
+				<p class="rotateNotice__title">Please rotate your device</p>
+				<p class="rotateNotice__text">This experience is designed for portrait.</p>
+			</div>
+		</div>
+
 		<slot />
 
 		<script src="../scripts/app.js"></script>
@@ -81,9 +90,52 @@ const socialImage = configuredSiteUrl
 	}
 
 	/* keyboard-only affordance — hide on touch devices where it pops up after the gate */
-	@media (max-width: 760px), (pointer: coarse) {
+	@media (max-width: 767px), (pointer: coarse) {
 		.skip-link {
 			display: none;
+		}
+	}
+
+	/* Landscape phones only: the pinned 100svh sections collapse at ~440px tall,
+	   so prompt for portrait rather than rendering a broken layout. Tablets and
+	   desktops are excluded by the height and pointer conditions. */
+	.rotateNotice {
+		display: none;
+	}
+
+	@media (orientation: landscape) and (max-height: 500px) and (pointer: coarse) {
+		.rotateNotice {
+			position: fixed;
+			inset: 0;
+			z-index: 2147483647;
+			display: grid;
+			place-items: center;
+			padding: 24px;
+			background: #000;
+			color: #f5efe4;
+			text-align: center;
+		}
+
+		.rotateNotice__icon {
+			display: block;
+			margin-bottom: 14px;
+			color: #ffbc54;
+			font-size: 34px;
+			line-height: 1;
+		}
+
+		.rotateNotice__title {
+			margin: 0;
+			font-size: 17px;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.rotateNotice__text {
+			margin: 8px 0 0;
+			color: rgba(245, 239, 228, 0.62);
+			font-size: 13px;
 		}
 	}
 </style>
