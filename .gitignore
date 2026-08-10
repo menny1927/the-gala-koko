@@ -35,3 +35,7 @@ dump.txt
 
 # local scratch / debug artifacts
 tmp/
+
+# temporary local map export tool (not for production)
+public/_map-export.html
+public/monochrome_dark_orbis_draft.json

@@ -13,23 +13,25 @@ import "../components/sections/koko.css";
   <main id="main-content">
     <section class="koko">
       <div class="koko-img">
-        <img class="koko-img-el" src="/images/london-map.svg" alt="Map of central London" />
+        <img class="koko-img-el" src="/images/london-map.webp" alt="Map of central London" />
+
+        {/* Anchored to the map itself (percentages), so they stay on the venues
+            whatever the viewport crops. */}
+        <div class="koko-marker koko-marker-1">
+          <span class="koko-marker-icon"></span>
+          <p class="koko-marker-label">KOKO Theatre</p>
+        </div>
+
+        <div class="koko-marker koko-marker-2">
+          <span class="koko-marker-icon"></span>
+          <p class="koko-marker-label">Royal Albert Hall</p>
+        </div>
       </div>
 
       <div class="koko-mask"></div>
 
       <div class="koko-grid-overlay">
         <img src="/grid-overlay.svg" alt="" />
-      </div>
-
-      <div class="koko-marker koko-marker-1">
-        <span class="koko-marker-icon"></span>
-        <p class="koko-marker-label">KOKO Theatre</p>
-      </div>
-
-      <div class="koko-marker koko-marker-2">
-        <span class="koko-marker-icon"></span>
-        <p class="koko-marker-label">Royal Albert Hall</p>
       </div>
 
       <div class="koko-content">
@@ -62,6 +64,12 @@ import "../components/sections/koko.css";
       </div>
 
       <div class="koko-scroll-progress-bar"></div>
+
+      <p class="koko-attribution">
+        <a href="https://www.openstreetmap.org/copyright" rel="noopener">© OpenStreetMap</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://www.tomtom.com/legal/en_gb/product-attributions/" rel="noopener">© TomTom</a>
+      </p>
     </section>
   </main>
 

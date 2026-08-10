@@ -36,6 +36,37 @@ export function initKoko() {
 
   const ease = (x) => x * x * (3 - 2 * x);
 
+  // Where each venue sits in the map image, as a fraction of its own width/height.
+  const VENUES = [
+    [marker1, 0.747, 0.416], // KOKO Theatre — Camden
+    [marker2, 0.454, 0.782], // Royal Albert Hall — South Kensington
+  ];
+
+  // The map is object-fit:cover, so it is scaled and cropped relative to its
+  // box — and which axis gets cropped flips between desktop and mobile. Derive
+  // the rendered geometry so the pins sit on the venues at any viewport.
+  const placeMarkers = () => {
+    const boxW = kokoImg.clientWidth;
+    const boxH = kokoImg.clientHeight;
+    const imgW = kokoImgEl.naturalWidth;
+    const imgH = kokoImgEl.naturalHeight;
+    if (!imgW || !imgH || !boxW || !boxH) return;
+
+    const scale = Math.max(boxW / imgW, boxH / imgH);
+    const renderedW = imgW * scale;
+    const renderedH = imgH * scale;
+    const offsetX = (boxW - renderedW) / 2;
+    const offsetY = (boxH - renderedH) / 2;
+
+    VENUES.forEach(([marker, fx, fy]) => {
+      marker.style.left = `${offsetX + fx * renderedW}px`;
+      marker.style.top = `${offsetY + fy * renderedH}px`;
+    });
+  };
+
+  placeMarkers();
+  if (!kokoImgEl.complete) kokoImgEl.addEventListener("load", placeMarkers, { once: true });
+
   const measure = () => {
     const viewportHeight = window.innerHeight;
     const contentMove = kokoContent.offsetHeight - viewportHeight;
@@ -47,6 +78,7 @@ export function initKoko() {
 
   window.addEventListener("resize", () => {
     m = measure();
+    placeMarkers();
     ScrollTrigger.refresh();
   });
 
