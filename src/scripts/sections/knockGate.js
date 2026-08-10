@@ -1,6 +1,30 @@
+const ENTERED_KEY = "gala:entered";
+
+const hasEntered = () => {
+  try {
+    return sessionStorage.getItem(ENTERED_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+};
+
+const rememberEntered = () => {
+  try {
+    sessionStorage.setItem(ENTERED_KEY, "1");
+  } catch (error) {
+    /* storage unavailable — the gate simply shows again next navigation */
+  }
+};
+
 export function initKnockGate() {
   const gate = document.querySelector("#knockGate");
   if (!gate) return;
+
+  // Navigating back to the homepage in the same session shouldn't re-gate.
+  if (hasEntered()) {
+    gate.remove();
+    return;
+  }
 
   const cursor = document.querySelector("#knockCursor");
   const label = document.querySelector("#knockCursorText");
@@ -66,6 +90,7 @@ export function initKnockGate() {
     unlocked = true;
 
     cleanup();
+    rememberEntered();
     document.documentElement.style.overflow = prevOverflow || "";
 
     // Scroll was locked while the gate was up, so any scroll-driven animation

@@ -1,3 +1,14 @@
+{/* Runs before the gate is parsed, so a returning visitor never sees it flash. */}
+<script is:inline>
+  try {
+    if (sessionStorage.getItem("gala:entered") === "1") {
+      document.documentElement.classList.add("has-entered");
+    }
+  } catch (error) {
+    /* private mode / storage disabled — show the gate as normal */
+  }
+</script>
+
 <section
   class="knockGate"
   id="knockGate"

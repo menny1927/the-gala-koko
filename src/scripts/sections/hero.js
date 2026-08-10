@@ -53,13 +53,11 @@ const revealConcept = (concept, scrollTrigger, extra = {}) => {
   return timeline;
 };
 
-const initOpeningStory = (hero) => {
+const initHorizontalStory = (hero) => {
   const horizontal = hero.querySelector("[data-hero-horizontal]");
   const track = hero.querySelector("[data-hero-track]");
-  const opening = hero.querySelector("[data-hero-opening]");
   const panels = [...(track?.querySelectorAll("[data-hero-concept]") ?? [])];
   const progressItems = [...hero.querySelectorAll("[data-hero-progress-item]")];
-  const progressNav = hero.querySelector("[data-hero-progress]");
 
   if (!horizontal || !track || panels.length < 2) return;
 
@@ -81,26 +79,21 @@ const initOpeningStory = (hero) => {
   };
 
   const travel = () => Math.max(0, track.scrollWidth - horizontal.clientWidth);
-  const introLen = () => window.innerHeight * 1.35;
   const hold = () => Math.max(320, horizontal.clientWidth * 0.4);
   const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
-  // Snapping now keeps cards from resting halfway, so the pinned distance no
+  // Snapping keeps cards from resting halfway, so the pinned distance no
   // longer needs to be stretched much to keep them readable.
   const scrollFactor = () => (isMobile() ? 1.15 : 1);
 
-  // Fixed timeline split — light opening → horizontal card travel → hold.
-  // Kept as constants (not derived from build-time pixel measurements) so the
-  // timeline is always well-formed even if it is built before layout settles.
-  const introShare = 0.22;
-  const moveShare = 0.7;
+  // The cards travel for most of the pin, then hold briefly before releasing.
+  const moveShare = 0.85;
 
-  // One pinned timeline so the light and the cards live in the exact same view.
   const tl = gsap.timeline({
     defaults: { ease: "none" },
     scrollTrigger: {
       trigger: horizontal,
       start: "top top",
-      end: () => `+=${(introLen() + travel() + hold()) * scrollFactor()}`,
+      end: () => `+=${(travel() + hold()) * scrollFactor()}`,
       pin: true,
       // Snap already settles the cards, so on mobile the track can track the
       // finger closely instead of easing in for another three-quarters of a
@@ -109,59 +102,37 @@ const initOpeningStory = (hero) => {
       anticipatePin: 1,
       invalidateOnRefresh: true,
       // Mobile: settle on whole cards so the track never rests halfway between
-      // two of them. The light intro and the trailing hold stay free-scrolling.
+      // two of them. The trailing hold stays free-scrolling.
       snap: {
         snapTo: (value) => {
           if (!isMobile()) return value;
 
-          const moveProgress = (value - introShare) / moveShare;
+          const moveProgress = value / moveShare;
           if (moveProgress <= 0 || moveProgress >= 1) return value;
 
           const steps = panels.length - 1;
-          return introShare + (Math.round(moveProgress * steps) / steps) * moveShare;
+          return (Math.round(moveProgress * steps) / steps) * moveShare;
         },
         duration: { min: 0.1, max: 0.25 },
         delay: 0.02,
         ease: "power2.out",
       },
       onUpdate: ({ progress }) => {
-        updateProgress(moveShare ? (progress - introShare) / moveShare : 0);
+        updateProgress(progress / moveShare);
       },
     },
   });
 
-  // --- Phase 1: theatre lights rise, the logo appears, then it all dissolves ---
-  const I = introShare;
-  const halo = opening?.querySelector("[data-hero-halo]");
-  const beam = opening?.querySelector("[data-hero-beam]");
-  const dust = opening?.querySelector("[data-hero-dust]");
-  const pool = opening?.querySelector("[data-hero-pool]");
-  const brand = opening?.querySelector("[data-hero-light-brand]");
-  const prompt = opening?.querySelector("[data-hero-light-prompt]");
-  const smoke = opening ? [...opening.querySelectorAll("[data-hero-smoke]")] : [];
-
-  if (prompt) tl.to(prompt, { autoAlpha: 0, y: 12, duration: 0.05 * I }, 0);
-  if (halo) tl.fromTo(halo, { autoAlpha: 0, scale: 0.55 }, { autoAlpha: 0.9, scale: 1, duration: 0.4 * I, ease: "power2.out" }, 0);
-  if (beam) tl.fromTo(beam, { autoAlpha: 0 }, { autoAlpha: 0.85, duration: 0.4 * I, ease: "power2.inOut" }, 0.03 * I);
-  if (smoke.length) tl.fromTo(smoke, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.42 * I, ease: "power1.out" }, 0.04 * I);
-  if (pool) tl.fromTo(pool, { autoAlpha: 0, scale: 0.2 }, { autoAlpha: 0.8, scale: 1, duration: 0.36 * I, ease: "power2.out" }, 0.12 * I);
-  if (dust) tl.fromTo(dust, { autoAlpha: 0 }, { autoAlpha: 0.42, duration: 0.28 * I, ease: "power1.out" }, 0.16 * I);
-  if (brand) tl.fromTo(brand, { autoAlpha: 0, y: 34, scale: 0.92 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.16 * I, ease: "power3.out" }, 0.34 * I);
-  // hold on the logo, then dissolve the opening so the first card is revealed in place
-  if (brand) tl.to(brand, { autoAlpha: 0, y: -46, scale: 0.99, duration: 0.14 * I, ease: "power2.in" }, 0.74 * I);
-  if (opening) tl.to(opening, { autoAlpha: 0, duration: 0.2 * I, ease: "power1.inOut" }, 0.82 * I);
-  if (progressNav) tl.fromTo(progressNav, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.16 * I, ease: "power1.out" }, 0.86 * I);
-
-  // --- Phase 2: the four cards travel horizontally, then hold ---
-  tl.to(track, { x: () => -travel(), duration: moveShare, ease: "none" }, introShare);
-  tl.to({}, { duration: Math.max(0.001, 1 - introShare - moveShare) });
+  // The cards travel horizontally, then hold.
+  tl.to(track, { x: () => -travel(), duration: moveShare, ease: "none" }, 0);
+  tl.to({}, { duration: 1 - moveShare });
 
   updateProgress(0);
 
   const cinematic = hero.querySelector('[data-hero-concept="cinematic"]');
   if (cinematic) {
-    // No scroll-reveal on the first card — the opening dissolve already reveals
-    // it, and a reversible reveal would blank its text when scrolling back up.
+    // No scroll-reveal on the first card — it is visible as soon as the section
+    // pins, and a reversible reveal would blank its text when scrolling back up.
     const backdrop = cinematic.querySelector("[data-hero-parallax]");
     if (backdrop) {
       gsap.to(backdrop, {
@@ -351,7 +322,7 @@ export function initHero() {
   }
 
   const context = gsap.context(() => {
-    initOpeningStory(hero);
+    initHorizontalStory(hero);
     initInvitation(hero);
   }, hero);
 

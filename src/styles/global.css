@@ -21,6 +21,11 @@ body {
   :root { --vh100: 100dvh; }
 }
 
+/* Already entered this session — hide before first paint, no flash. */
+.has-entered #knockGate {
+  display: none;
+}
+
 .knockGate{
   position: fixed;
   inset: 0;
