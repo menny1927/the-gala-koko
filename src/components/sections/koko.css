@@ -250,7 +250,7 @@
   will-change: transform;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
   .koko-mask {
     mask: linear-gradient(var(--light), var(--light)),
       url("/mask.svg") center/75% no-repeat;

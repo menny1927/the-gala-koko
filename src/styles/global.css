@@ -164,7 +164,7 @@ body {
   white-space: nowrap;
 }
 
-@media (max-width: 760px), (pointer: coarse) {
+@media (max-width: 767px), (pointer: coarse) {
   .knockGate {
     cursor: auto;
     background: #000;
@@ -1113,7 +1113,7 @@ select {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .experienceStack__intro {
     width: calc(100% - 24px);
     padding-top: 48px;

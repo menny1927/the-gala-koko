@@ -89,7 +89,7 @@
   outline-offset: 5px;
 }
 
-@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
   .radial-page {
     min-height: auto;
   }

@@ -15,7 +15,7 @@ export function initPastEventsScatter() {
 
   if (!gallery || !heading) return;
 
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const isMobile = window.matchMedia("(max-width: 767px)").matches;
 
   const CONFIG = {
     cardCount: isMobile ? 5 : 10,

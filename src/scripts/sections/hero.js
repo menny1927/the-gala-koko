@@ -83,7 +83,7 @@ const initOpeningStory = (hero) => {
   const travel = () => Math.max(0, track.scrollWidth - horizontal.clientWidth);
   const introLen = () => window.innerHeight * 1.35;
   const hold = () => Math.max(320, horizontal.clientWidth * 0.4);
-  const isMobile = () => window.matchMedia("(max-width: 760px)").matches;
+  const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
   // Snapping now keeps cards from resting halfway, so the pinned distance no
   // longer needs to be stretched much to keep them readable.
   const scrollFactor = () => (isMobile() ? 1.15 : 1);

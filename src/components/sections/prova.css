@@ -209,7 +209,7 @@
 /* =========================
    Responsive
    ========================= */
-@media (max-width: 900px) {
+@media (max-width: 767px) {
   /* Screen 1 */
   .prova-img--left,
   .prova-img--right {

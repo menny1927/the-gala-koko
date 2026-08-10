@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { interiors } from "../../data/interiors.js";
 
-const mobileQuery = "(max-width: 760px)";
+const mobileQuery = "(max-width: 767px)";
 const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
 
 export function initRadialGallery() {
